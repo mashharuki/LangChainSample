@@ -1,0 +1,2 @@
+# LangChainSample
+TypeScriptで実装するLangChain練習用のリポジトリです
