@@ -6,9 +6,11 @@
   "author": "Haruki Kondo",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "stream": "ts-node src/stream.ts",
-    "ragExample": "ts-node src/ragExample.ts",
+    "start": "ts-node src/openai/index.ts",
+    "sample": "ts-node src/openai/sample.ts",
+    "sample2": "ts-node src/openai/sample2.ts",
+    "stream": "ts-node src/openai/stream.ts",
+    "ragExample": "ts-node src/openai/ragExample.ts",
     "anthropic:sample": "ts-node src/anthropic/sample.ts",
     "anthropic:sample2": "ts-node src/anthropic/sample2.ts"
   },

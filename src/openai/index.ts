@@ -1,5 +1,5 @@
 import {ChatPromptTemplate} from "@langchain/core/prompts";
-import {createOpenAiPromptChain} from "./model";
+import {createOpenAiPromptChain} from "../model";
 
 /**
  * mainスクリプト
