@@ -1,11 +1,5 @@
-import {ChatOpenAI} from "@langchain/openai";
 import {ChatPromptTemplate} from "@langchain/core/prompts";
-import {StringOutputParser} from "@langchain/core/output_parsers";
-import * as dotenv from "dotenv";
-
-dotenv.config();
-
-const {OPENAI_API_KEY} = process.env;
+import {createOpenAiPromptChain} from "./model";
 
 /**
  * mainスクリプト
@@ -15,18 +9,14 @@ const main = async () => {
         ================================ [START] ================================
     `);
 
-  // プロンプト
-  const prompt = ChatPromptTemplate.fromMessages([
+  // プロンプトのテンプレートを作成する。
+  const prompt: ChatPromptTemplate = ChatPromptTemplate.fromMessages([
     ["human", "Tell me a short joke about {topic}"],
   ]);
-  // モデル指定
-  const model = new ChatOpenAI({
-    apiKey: OPENAI_API_KEY!,
-  });
 
-  const outputParser = new StringOutputParser();
   // プロンプトチェーンを作成
-  const chain = prompt.pipe(model).pipe(outputParser);
+  const chain = await createOpenAiPromptChain(prompt);
+
   // 実行
   const response = await chain.invoke({
     topic: "ice cream",

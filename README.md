@@ -10,6 +10,7 @@ TypeScript で実装する LangChain 練習用のリポジトリです
 
   ```txt
   OPENAI_API_KEY=""
+  ANTHROPIC_API_KEY=""
   ```
 
 - **install**
@@ -17,6 +18,32 @@ TypeScript で実装する LangChain 練習用のリポジトリです
   ```bash
   yarn
   ```
+
+- **run scripts**
+
+  - **Sample Call LLM**
+
+    ```bash
+    yarn start
+    ```
+
+  - **RAG Example**
+
+    ```bash
+    yarn ragExample
+    ```
+
+  - **Anthropic Sample**
+
+    ```bash
+    yarn anthropic:sample
+    ```
+
+  - **Anthropic Sample2**
+
+    ```bash
+    yarn anthropic:sample2
+    ```
 
 ### 参考文献
 

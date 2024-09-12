@@ -22,7 +22,7 @@ const main = async () => {
     `;
 
   // プロンプトを作成
-  const prompt = ChatPromptTemplate.fromTemplate(TEMPLATE);
+  const prompt: ChatPromptTemplate = ChatPromptTemplate.fromTemplate(TEMPLATE);
 
   const model = new ChatOpenAI({
     apiKey: OPENAI_API_KEY!,
