@@ -80,7 +80,10 @@ const main = async () => {
     const response = await chain.invoke(`
         MagicBookについて簡単なクイズを作成してください。
         
-        その際、4択して正解は1つにしてください。
+        その際、回答は4択して正しい答えが1つだけになるようにしてください。
+        問題と回答は1ペアだけ作成してください。
+
+        問題と回答はJSON形式で出力してください。
     `);
     console.log(response);
   } catch (e: any) {
