@@ -11,6 +11,7 @@
     "sample2": "ts-node src/openai/sample2.ts",
     "stream": "ts-node src/openai/stream.ts",
     "ragExample": "ts-node src/openai/ragExample.ts",
+    "magicBookRag": "ts-node src/openai/magicBookRag.ts",
     "anthropic:sample": "ts-node src/anthropic/sample.ts",
     "anthropic:sample2": "ts-node src/anthropic/sample2.ts"
   },

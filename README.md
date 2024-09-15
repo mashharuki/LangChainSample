@@ -39,6 +39,12 @@ TypeScript で実装する LangChain 練習用のリポジトリです
     yarn ragExample
     ```
 
+  - ***
+
+    ```bash
+    yarn magicBookRag
+    ```
+
   - **Anthropic Sample**
 
     ```bash

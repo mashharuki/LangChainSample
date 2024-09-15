@@ -1,0 +1,95 @@
+import {ChatOpenAI, OpenAIEmbeddings} from "@langchain/openai";
+import {HNSWLib} from "@langchain/community/vectorstores/hnswlib";
+import {Document} from "@langchain/core/documents";
+import {ChatPromptTemplate} from "@langchain/core/prompts";
+import {
+  RunnableLambda,
+  RunnableMap,
+  RunnablePassthrough,
+} from "@langchain/core/runnables";
+import {StringOutputParser} from "@langchain/core/output_parsers";
+import * as dotenv from "dotenv";
+import * as fs from "fs/promises";
+
+dotenv.config();
+
+const {OPENAI_API_KEY} = process.env;
+
+/**
+ * Markdownファイルを読み込んでstring型に変換する関数
+ * @param filePath
+ * @returns
+ */
+async function readMarkdownFile(filePath: string): Promise<string> {
+  try {
+    // ファイルの内容を読み込む (Bufferとして取得)
+    const fileContent = await fs.readFile(filePath, "utf-8");
+
+    // 文字列として返す
+    return fileContent;
+  } catch (error) {
+    console.error("Error reading the file:", error);
+    throw error; // エラーが発生した場合はエラーを投げる
+  }
+}
+
+/**
+ * mainスクリプト
+ */
+const main = async () => {
+  console.log(`
+        ================================ [START] ================================
+    `);
+
+  // マークダウンの内容を読み込む
+  const content = await readMarkdownFile("./data/MagicBlock.md");
+  // ベクトルデータストア
+  const vectorStore = await HNSWLib.fromDocuments(
+    [new Document({pageContent: content})],
+    new OpenAIEmbeddings()
+  );
+  const retriever = vectorStore.asRetriever(1);
+  // テンプレートプロンプト
+  const prompt = ChatPromptTemplate.fromMessages([
+    [
+      "ai",
+      `Please create simple question based on only the following context:
+        
+      {context}`,
+    ],
+    ["human", "{question}"],
+  ]);
+  // モデルを指定
+  const model = new ChatOpenAI({
+    apiKey: OPENAI_API_KEY!,
+  });
+  const outputParser = new StringOutputParser();
+
+  const setupAndRetrieval = RunnableMap.from({
+    context: new RunnableLambda({
+      func: (input: string) =>
+        retriever.invoke(input).then((response) => response[0].pageContent),
+    }).withConfig({runName: "contextRetriever"}),
+    question: new RunnablePassthrough(),
+  });
+
+  try {
+    // プロンプトチェーンを作成
+    const chain = setupAndRetrieval.pipe(prompt).pipe(model).pipe(outputParser);
+    // プロンプトを実行
+    const response = await chain.invoke(`
+        MagicBookについて簡単なクイズを作成してください。
+        
+        その際、4択して正解は1つにしてください。
+    `);
+    console.log(response);
+  } catch (e: any) {
+    console.error("error: ", e);
+  }
+
+  console.log(`
+        ================================ [END] ================================
+    `);
+};
+
+main();
