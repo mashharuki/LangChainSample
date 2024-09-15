@@ -12,6 +12,7 @@
     "stream": "ts-node src/openai/stream.ts",
     "ragExample": "ts-node src/openai/ragExample.ts",
     "magicBookRag": "ts-node src/openai/magicBookRag.ts",
+    "generateImage": "ts-node src/openai/generateImage",
     "anthropic:sample": "ts-node src/anthropic/sample.ts",
     "anthropic:sample2": "ts-node src/anthropic/sample2.ts"
   },
@@ -20,6 +21,7 @@
     "@langchain/community": "^0.2.33",
     "@langchain/openai": "^0.2.10",
     "@types/node": "^22.5.4",
+    "axios": "^1.7.7",
     "dotenv": "^16.4.5",
     "hnswlib-node": "^3.0.0",
     "npx": "^10.2.2",
