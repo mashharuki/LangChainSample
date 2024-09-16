@@ -24,37 +24,43 @@ TypeScript で実装する LangChain 練習用のリポジトリです
   - **Sample Call LLM**
 
     ```bash
-    yarn start
+    yarn script start
     ```
 
   - **generate NFT Metadata**
 
     ```bash
-    yarn sample
+    yarn script sample
     ```
 
   - **RAG Example**
 
     ```bash
-    yarn ragExample
+    yarn script ragExample
     ```
 
-  - ***
+  - **generate quiz about magicBlock**
 
     ```bash
-    yarn magicBookRag
+    yarn scripts magicBookRag
+    ```
+
+  - **generate monster Image**
+
+    ```bash
+    yarn script generateImage
     ```
 
   - **Anthropic Sample**
 
     ```bash
-    yarn anthropic:sample
+    yarn script anthropic:sample
     ```
 
   - **Anthropic Sample2**
 
     ```bash
-    yarn anthropic:sample2
+    yarn script anthropic:sample2
     ```
 
 ### 参考文献

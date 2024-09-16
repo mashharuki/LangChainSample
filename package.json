@@ -1,31 +1,15 @@
 {
   "name": "LangChainSample",
   "version": "1.0.0",
+  "private": true,
   "main": "index.js",
   "repository": "https://github.com/mashharuki/LangChainSample.git",
   "author": "Haruki Kondo",
   "license": "MIT",
+  "workspaces": [
+    "pkgs/*"
+  ],
   "scripts": {
-    "start": "ts-node src/openai/index.ts",
-    "sample": "ts-node src/openai/sample.ts",
-    "sample2": "ts-node src/openai/sample2.ts",
-    "stream": "ts-node src/openai/stream.ts",
-    "ragExample": "ts-node src/openai/ragExample.ts",
-    "magicBookRag": "ts-node src/openai/magicBookRag.ts",
-    "generateImage": "ts-node src/openai/generateImage",
-    "anthropic:sample": "ts-node src/anthropic/sample.ts",
-    "anthropic:sample2": "ts-node src/anthropic/sample2.ts"
-  },
-  "dependencies": {
-    "@langchain/anthropic": "^0.2.18",
-    "@langchain/community": "^0.2.33",
-    "@langchain/openai": "^0.2.10",
-    "@types/node": "^22.5.4",
-    "axios": "^1.7.7",
-    "dotenv": "^16.4.5",
-    "hnswlib-node": "^3.0.0",
-    "npx": "^10.2.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.6.2"
+    "script": "yarn workspace script"
   }
 }
