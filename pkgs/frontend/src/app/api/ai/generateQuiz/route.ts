@@ -44,11 +44,13 @@ export async function POST() {
     const content = await readMarkdownFile(
       path.join("./src/data", "MagicBlock.md")
     );
-    console.log("content:::", content);
+    // console.log("content:::", content);
     // ベクトルデータストア
     const vectorStore = await HNSWLib.fromDocuments(
       [new Document({pageContent: content})],
-      new OpenAIEmbeddings()
+      new OpenAIEmbeddings({
+        openAIApiKey: OPENAI_API_KEY,
+      })
     );
     const retriever = vectorStore.asRetriever(1);
     // テンプレートプロンプト
@@ -57,10 +59,11 @@ export async function POST() {
         "ai",
         `Please create simple question based on only the following context:
         
-      {context}`,
+        {context}`,
       ],
       ["human", "{question}"],
     ]);
+
     // モデルを指定
     const model = new ChatOpenAI({
       apiKey: OPENAI_API_KEY,

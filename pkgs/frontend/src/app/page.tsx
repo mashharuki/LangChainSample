@@ -41,10 +41,23 @@ export default function Home() {
       console.log("response2", response2);
       console.log("response2.data", response2.data);
       console.log("imageUrl: ", response2.data.imageUrl);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error("Axiosのエラーが発生しました:", error);
+      } else {
+        console.error("Axios以外のエラーが発生しました:", error);
+      }
+    }
+  };
 
+  /**
+   * クイズを生成するメソッド
+   */
+  const generateQuizData = async () => {
+    try {
       // 問題と回答を自動生成するAPIを呼び出す。
-      const response3 = await axios.post("/api/ai/generateQuiz");
-      console.log("response3", response3);
+      const response = await axios.post("/api/ai/generateQuiz");
+      console.log("response:::", response);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error("Axiosのエラーが発生しました:", error);
@@ -75,6 +88,16 @@ export default function Home() {
             }}
           >
             Generate NFT Data
+          </button>
+        </div>
+        <div className="flex gap-4 items-center flex-col sm:flex-row">
+          <button
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            onClick={async () => {
+              await generateQuizData();
+            }}
+          >
+            Generate Quiz Data
           </button>
         </div>
       </main>
